@@ -4,8 +4,8 @@
 *  @details 定义了SafeInt类用于存储高精度整数，SafeInt核心使用bitset储存信息
 *  @mainpage Class SafeInt
 *  @author He Q.Y.
-*  @version 1.0.0
-*  @date 2024-3-17
+*  @version 1.4
+*  @date 2024-3-18
 */
 #ifndef safe_int_h
 #define safe_int_h
