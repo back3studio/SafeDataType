@@ -42,7 +42,7 @@ class SafeInt{
 	void fromstring(const std::string &s);
 
     /**
-    * @brief 从控制台输入SafeInt
+    * @brief 从标准输入输入SafeInt
     */
 	void read();
 
@@ -54,7 +54,7 @@ class SafeInt{
 	std::string tostring() const;
 
 	/**
-	* @brief 输出SafeInt的值
+	* @brief 向标准输出输出SafeInt的值
 	*/
 	void print();
 
