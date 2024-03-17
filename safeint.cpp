@@ -243,7 +243,7 @@ SafeInt<n> operator*(const SafeInt<n>& a,const SafeInt<n>& b){
     SafeInt<n> c;
     for (int i=0;i<n;i++){
         if (b[n-i-1]){
-            c=c+SafeInt<n>(a.getVal()<<i);
+            c=c+(i!=n-1)? SafeInt<n>(a.getVal()<<i) : SafeInt<n>(~(a.getVal()<<i));
         }
     }
 }
