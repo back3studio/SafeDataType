@@ -38,6 +38,15 @@
 * <tr><td>2024/03/18    <td> 1.4        <td>He Q.Y.     <td>基本功能全部实现   </tr>
 * </table>
 */
+*/*
+*  @file safeint.cpp
+*  @brief SafeInt类的实现
+*  @details 实现了SafeInt类的计算，使用等功能。
+*  @mainpage 具体实现
+*  @author He Q.Y.
+*  @version 1.4
+*  @date 2024-3-18
+*/
 #include "safeint.h"
 #include <cmath>
 /**
