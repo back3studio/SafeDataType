@@ -72,7 +72,7 @@ void SafeInt<n>::fromstring(const std::string &s){
 }
 
 /**
-* @brief 从控制台输入SafeInt
+* @brief 从标准输入输入SafeInt
 */
 template<int n>
 void SafeInt<n>::read(){
@@ -90,7 +90,7 @@ std::string SafeInt<n>::tostring() const{
 }
 
 /**
-* @brief 输出SafeInt的值
+* @brief 向标准输出输出SafeInt的值
 */
 tmeplate <int n>
 void SafeInt<n>::print(){
