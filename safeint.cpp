@@ -30,10 +30,11 @@
 * @endcode
 * @section 更新日志
 * <table>
-* <tr><th> Date         <th>Version     <th>Author      <th>Description </tr>
-* <tr><td>2024/03/09    <td> 1.0        <td>Hong X.Y.   <td>创建项目    </tr>
-* <tr><td>2024/03/10    <td> 1.1        <td>He Q.Y.     <td>提交架构    </tr>
-* <tr><td>2024/03/17    <td> 1.2        <td>He Q.Y.     <td>完成部分实现 </tr>
+* <tr><th> Date         <th>Version     <th>Author      <th>Description。   </tr>
+* <tr><td>2024/03/09    <td> 1.0        <td>Hong X.Y.   <td>创建项目         </tr>
+* <tr><td>2024/03/10    <td> 1.1        <td>He Q.Y.     <td>提交架构         </tr>
+* <tr><td>2024/03/17    <td> 1.2        <td>He Q.Y.     <td>完成三则运算和比较 </tr>
+* <tr><td>2024/03/18    <td> 1.3        <td>He Q.Y.     <td>逻辑上实现IO      </tr>
 * </table>
 */
 #include "safeint.h"
@@ -68,7 +69,32 @@ SafeInt<n>::SafeInt(const std::bitset<n>_val){
 */
 template<int n>
 void SafeInt<n>::fromstring(const std::string &s){
-
+    // n 符号标志，b 读入其他符号标志
+    bool n=false,b=true;
+    //遍历s
+    for (char a:s){
+        if (a<='9'&&a>='0'){
+            // 如果输入为数字，正常读入,应计得绝对值
+            *this=*this+(a-'0');
+            *this=*this*10;
+        }else{
+            // 特殊符号，如果出现在开头,即b为1，试着确定符号
+            if (a=='-'&&b){
+                // 首个字符为- 标记为负数
+                n=true;
+            }else if(a!='+'||(!b)){
+                // 如果首个字符不为+或-或出现特殊字符于数字中间，则结束输入，置0
+                val=0;
+                return;
+            }
+        }
+        //标记为不首个字符
+        b=false；
+    ｝
+    if (n){
+        //如果为负数、取相反数
+        this->opposite();
+    }
 }
 
 /**
@@ -76,7 +102,39 @@ void SafeInt<n>::fromstring(const std::string &s){
 */
 template<int n>
 void SafeInt<n>::read(){
-
+    // n 符号标志，b 读入其他符号标志
+    bool n=false,b=true;
+    // a 输入的字符
+    char a;
+    //重复输入
+    while (true){
+        a=getchar();
+        if (a<='9'&&a>='0'){
+            // 如果输入为数字，正常读入,应计得绝对值
+            *this=*this+(a-'0');
+            *this=*this*10;
+        }else{
+            // 特殊符号，如果出现在开头,即b为1，试着确定符号
+            if (a=='-'&&b){
+                // 首个字符为- 标记为负数
+                n=true;
+            }else if(a!='+'||(!b)){
+                // 如果首个字符不为+或-或出现特殊字符于数字中间，则结束输入
+                if (a!='\n'&&a!=' '){
+                    //读入非正常的特殊字符，异常结束，置0
+                    val=0;
+                    n=0;
+                }
+                break;
+            }
+        }
+        //标记为非首字符
+        b=false；
+    ｝
+    if (n){
+        //如果为负数、取相反数
+        this->opposite();
+    }
 }
 
 /**
@@ -86,7 +144,21 @@ void SafeInt<n>::read(){
 */
 template<int n>
 std::string SafeInt<n>::tostring() const{
-
+    // s 存储结果
+    std::string s;
+    // 复制this的值
+    SafeInt<n> _a=*this;
+    // 取绝对值
+    if (_a[0])
+        _a.opposite();
+    //类似快读完成输入
+    while (_a!=0){
+        s=((_a%10).getVal().to_ulong()+'0')+s;
+        _a=_a/10;
+    }
+    //判断符号
+    if (val[0]) s='-'+s;
+    return s;
 }
 
 /**
@@ -94,7 +166,7 @@ std::string SafeInt<n>::tostring() const{
 */
 tmeplate <int n>
 void SafeInt<n>::print(){
-
+    printf("%s",tostring().c_str());
 }
 
 /**
@@ -324,7 +396,7 @@ SafeInt<n> operator*(const SafeInt<n>& a,const long long& b){
 */
 template<int n>
 SafeInt<n> operator/(const SafeInt<n>& a,const long long& b){
-
+    return a/SafeInt<n>(b);
 }
 
 /**
@@ -337,7 +409,7 @@ SafeInt<n> operator/(const SafeInt<n>& a,const long long& b){
 */
 template<int n>
 SafeInt<n> operator%(const SafeInt<n>& a,const long long& b){
-
+    return a%SafeInt<n>(b);
 }
 
 /**
@@ -389,7 +461,7 @@ SafeInt<n> operator*(const long long& b, const SafeInt<n>& a){
 */
 template<int n>
 SafeInt<n> operator/(const long long& b, const SafeInt<n>& a){
-
+    return SafeInt<n>(a)/b;
 }
 
 /**
@@ -402,7 +474,7 @@ SafeInt<n> operator/(const long long& b, const SafeInt<n>& a){
 */
 template<int n>
 SafeInt<n> operator%(const long long& b, const SafeInt<n>& a){
-
+    return SafeInt<n>(a)/b;
 }
 
 /**
@@ -415,7 +487,40 @@ SafeInt<n> operator%(const long long& b, const SafeInt<n>& a){
 */
 template<int n>
 std::istream& operator>>(std::istream &in, SafeInt<n> &b){
-
+// n 符号标志，b 读入其他符号标志
+    bool n=false,b=true;
+    // a 输入的字符
+    char a;
+    //重复输入
+    while (true){
+        in>>a;
+        if (a<='9'&&a>='0'){
+            // 如果输入为数字，正常读入,应计得绝对值
+            *this=*this+(a-'0');
+            *this=*this*10;
+        }else{
+            // 特殊符号，如果出现在开头,即b为1，试着确定符号
+            if (a=='-'&&b){
+                // 首个字符为- 标记为负数
+                n=true;
+            }else if(a!='+'||(!b)){
+                // 如果首个字符不为+或-或出现特殊字符于数字中间，则结束输入
+                if (a!='\n'&&a!=' '){
+                    //读入非正常的特殊字符，异常结束，置0
+                    val=0;
+                    n=0;
+                }
+                break;
+            }
+        }
+        //标记为非首字符
+        b=false；
+    ｝
+    if (n){
+        //如果为负数、取相反数
+        this->opposite();
+    }
+    return in;
 }
 
 /**
@@ -427,8 +532,9 @@ std::istream& operator>>(std::istream &in, SafeInt<n> &b){
 * @return 返回输出后的输出流
 */
 template<int n>
-std::ostream& operator<<(std::ostream &in, const SafeInt<n> &b){
-
+std::ostream& operator<<(std::ostream &out, const SafeInt<n> &b){
+    out<<b.tostring();
+    return out;
 }
 
 /**
