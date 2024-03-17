@@ -35,6 +35,7 @@
 * <tr><td>2024/03/10    <td> 1.1        <td>He Q.Y.     <td>提交架构         </tr>
 * <tr><td>2024/03/17    <td> 1.2        <td>He Q.Y.     <td>完成三则运算和比较 </tr>
 * <tr><td>2024/03/18    <td> 1.3        <td>He Q.Y.     <td>逻辑上实现IO      </tr>
+* <tr><td>2024/03/18    <td> 1.4        <td>He Q.Y.     <td>基本功能全部实现   </tr>
 * </table>
 */
 #include "safeint.h"
@@ -496,7 +497,7 @@ SafeInt<n> operator/(const long long& b, const SafeInt<n>& a){
 */
 template<int n>
 SafeInt<n> operator%(const long long& b, const SafeInt<n>& a){
-    return SafeInt<n>(a)/b;
+    return SafeInt<n>(a)%b;
 }
 
 /**
