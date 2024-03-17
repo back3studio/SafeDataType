@@ -33,10 +33,11 @@
 * <tr><th> Date         <th>Version     <th>Author      <th>Description </tr>
 * <tr><td>2024/03/09    <td> 1.0        <td>Hong X.Y.   <td>创建项目    </tr>
 * <tr><td>2024/03/10    <td> 1.1        <td>He Q.Y.     <td>提交架构    </tr>
-* <tr><td>2024/03/17    <td> 1.2        <td>He Q.Y.     <td>完成部分实现</tr>
+* <tr><td>2024/03/17    <td> 1.2        <td>He Q.Y.     <td>完成部分实现 </tr>
 * </table>
 */
 #include "safeint.h"
+#include <cmath>
 /**
 * @brief 从标准的整数构造SafeInt,默认为0
 *
@@ -44,7 +45,10 @@
 */
 template<int n>
 SafeInt<n>::SafeInt(const long long _val){
-
+    val=abs(_val);
+    if (_val<0){
+       opposite();
+    }
 }
 
 /**
@@ -54,7 +58,7 @@ SafeInt<n>::SafeInt(const long long _val){
 */
 template<int n>
 SafeInt<n>::SafeInt(const std::bitset<n>_val){
-
+    val=_val;
 }
 
 /**
@@ -100,7 +104,7 @@ void SafeInt<n>::print(){
 */
 template <int n>
 std::bitset<n> SafeInt<n>::getVal() const{
-
+    return val;
 }
 
 /**
@@ -110,15 +114,71 @@ std::bitset<n> SafeInt<n>::getVal() const{
 */
 template <int n>
 void SafeInt<n>::setVal(std::bitset<n> _val){
-
+    val=_val;
 }
 
 /**
 * @brief 这个数设置为自己的相反数
+* @details 可以将自己设为自己的相反数，重点在于补码和反码的转换
+* 通过与-1或+1，实现转换。对于负数，得到反码后只需要取反得到原码，
+* 正数反之亦然
 */
 template <int n>
 void SafeInt<n>::opposite(){
-
+    //检测原数的符号
+    if (!val[0]){
+        //正数，符号位取反同时取反码
+        val.flip();
+        /*
+        a 1的值
+        _val 暂存补码的值
+        */
+        std::bitset<n>a=1,_val;
+        // 进位标志
+        bool car=0;
+        // 模拟加法，_val=val+1
+        for (int i=n-1;i>=0;i--){
+            _val[i]=val[i]!=a[i]!=car;
+            car=val[i]&&a[i]&&car;
+        }
+        //如果未溢出，则更新val
+        if (_val[0])val=_val;
+        else 
+            //溢出，则撤销取反操作
+            val.flip()
+    }else{
+        //负数，则先减去一，得到反码
+        /*
+        a，b储存1
+        _a 存储a的相反数，即-1
+        _val 暂存val的原码
+        */
+        std::bitset<n>a=1,b=1,_a,_val;
+        // 取a的相反数，先取反码
+        a.flip();
+        // 进位标志
+        bool car=0;
+        //类似前面，不再解释
+        for (int i=n-1;i>=0;i--){
+            _a[i]=a[i]!=b[i]!=car;
+            car=a[i]&&b[i]&&car;
+        }
+        //如果溢出、操作直接结束（理论上不可能）
+        if (!a[0])return;
+        //将进位标志设置为0
+        car=0;
+        //同样，模拟加法_val=val+_a=val-1
+        for (int i=n-1;i>=0;i--){
+            _val[i]=val[i]!=_a[i]!=car;
+            car=val[i]&&_a[i]&&car;
+        }
+        //如果没有溢出，更新val的值
+        if (!val[0]) val=_val;
+        else
+            //如果溢出，结束操作
+            return;
+        val.flip();
+    }
 }
 
 /**
