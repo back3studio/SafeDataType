@@ -269,7 +269,7 @@ std::istream& operator>>(std::istream &in, SafeInt<n> &b);
 * @return 返回输出后的输出流
 */
 template<int n>
-std::ostream& operator<<(std::ostream &in, const SafeInt<n> &b);
+std::ostream& operator<<(std::ostream &out, const SafeInt<n> &b);
 
 /**
 * @brief 比较两个SafeInt的大小
