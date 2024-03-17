@@ -2,7 +2,7 @@
 *  @file safeint.h
 *  @brief SafeInt类的头文件
 *  @details 定义了SafeInt类用于存储高精度整数，SafeInt核心使用bitset储存信息
-*  @mainpage Class SafeInt
+*  @mainpage 概况
 *  @author He Q.Y.
 *  @version 1.4
 *  @date 2024-3-18
