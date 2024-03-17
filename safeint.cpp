@@ -332,17 +332,26 @@ SafeInt<n> operator*(const SafeInt<n>& a,const SafeInt<n>& b){
 */
 template<int n>
 SafeInt<n> operator/(const SafeInt<n>& a,const SafeInt<n>& b){
+    // 暂存a，b的拷贝值
     SafeInt<n> _a=a,_b=b;
+    // 缓存商
     std::bitset<int> c;
+    //对_a，_b取绝对值
     if (a.getVal()[0]) _a.opposite();
     if (b.getVal()[0]) _b.opposite();
+    // 错位相减
     for (int i=n-1;i>=1;i--){
-        if (SafeInt<n>(_a.getVal()>>i)<_a) c[i]=false;
+        if (SafeInt<n>(_a.getVal()>>i)<_a) 
+            //不够减，当前位置0
+            c[i]=false;
         else{
+            //够减，当前位置1，并将_a减去_b位移后值
             _a= _a-SafeInt<n>(_b.getVal()<<i);
             c[i]=1;
         }
     }
+    //判断符号并返回最终结果
+    c[0]=a.getVal()[0]!=b.getVal()[0];
     return SafeInt<n>(c);
 }
 
@@ -356,6 +365,7 @@ SafeInt<n> operator/(const SafeInt<n>& a,const SafeInt<n>& b){
 */
 template<int n>
 SafeInt<n> operator%(const SafeInt<n>& a,const SafeInt<n>& b){
+    // 与除法类似
     SafeInt<n> _a=a,_b=b;
     std::bitset<int> c;
     if (a.getVal()[0]) _a.opposite();
@@ -367,6 +377,10 @@ SafeInt<n> operator%(const SafeInt<n>& a,const SafeInt<n>& b){
             c[i]=1;
         }
     }
+    // 如果两数一正一负，则计算_b-_a
+    if (a.getVal[0]==b.getVal[0]) _a=b-_a;
+    // 如果两数同负，则模为绝对值模的相反数
+    if (!(a.getVal[0]||b.getVal[0])) _a.opposite();
     return _a;
 }
 
