@@ -242,7 +242,7 @@ SafeInt<n> operator/(const SafeInt<n>& a,const SafeInt<n>& b){
 * @return 返回a%b的值
 */
 template<int n>
-SafeInt<n> operator%const SafeInt<n>& a,const SafeInt<n>& b){
+SafeInt<n> operator%(const SafeInt<n>& a,const SafeInt<n>& b){
 
 }
 
@@ -294,7 +294,7 @@ SafeInt<n> operator*(const SafeInt<n>& a,const long long& b){
 * @return 返回a/b的商
 */
 template<int n>
-SafeInt<n> operator/(const SafeInt<n>& a,const long long& b
+SafeInt<n> operator/(const SafeInt<n>& a,const long long& b){
 
 }
 
@@ -310,6 +310,72 @@ template<int n>
 SafeInt<n> operator%(const SafeInt<n>& a,const long long& b){
 
 }
+
+/**
+* @brief 为一个SafeInt和一个标准整数重载求和
+*
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+*
+* @return 返回a+b的和
+*/
+template<int n>
+SafeInt<n> operator+(const long long& b, const SafeInt<n>& a){
+
+}
+
+/**
+* @brief 为一个SafeInt和一个标准整数重载求差
+*
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+*
+* @return 返回a-b的差
+*/
+template<int n>
+SafeInt<n> operator-(const long long& b, const SafeInt<n>& a){
+
+}
+
+/**
+* @brief 为一个SafeInt和一个标准整数重载求积
+*
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+*
+* @return 返回a*b的积
+*/
+template<int n>
+SafeInt<n> operator*(const long long& b, const SafeInt<n>& a){
+
+}
+
+/**
+* @brief 为一个SafeInt和一个标准整数重载求商
+*
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+*
+* @return 返回a/b的商
+*/
+template<int n>
+SafeInt<n> operator/(const long long& b, const SafeInt<n>& a){
+
+}
+
+/**
+* @brief 为一个SafeInt和一个标准整数重载求商
+*
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+*
+* @return 返回a%b的值
+*/
+template<int n>
+SafeInt<n> operator%(const long long& b, const SafeInt<n>& a){
+
+}
+
 /**
 * @brief 从输入流输入SafeInt
 *
@@ -333,5 +399,278 @@ std::istream& operator>>(std::istream &in, SafeInt<n> &b){
 */
 template<int n>
 std::ostream& operator<<(std::ostream &in, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较两个SafeInt的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否小于b
+*     @retval true a<b
+*     @retval false a<=b
+*/
+template<int n>
+bool operator<(const SafeInt<n> &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个标准整数
+* 
+* @return 返回a是否小于b
+*     @retval true a<b
+*     @retval false a<=b
+*/
+template<int n>
+bool operator<(const SafeInt<n> &a,const long long &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否小于b
+*     @retval true a<b
+*     @retval false a<=b
+*/
+template<int n>
+bool operator<(const long long &a, const SafeInt<n> &b){
+
+}
+
+
+/**
+* @brief 比较两个SafeInt的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否大于b
+*     @retval true a>b
+*     @retval false a<=b
+*/
+template<int n>
+bool operator>(const SafeInt<n> &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个标准整数
+* 
+* @return 返回a是否大于b
+*     @retval true a>b
+*     @retval false a<=b
+*/
+template<int n>
+bool operator>(const SafeInt<n> &a,const long long &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否大于b
+*     @retval true a>b
+*     @retval false a<=b
+*/
+template<int n>
+bool operator>(const long long &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较两个SafeInt的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否等于b
+*     @retval true a==b
+*     @retval false a!=b
+*/
+template<int n>
+bool operator==(const SafeInt<n> &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个标准整数
+* 
+* @return 返回a是否等于b
+*     @retval true a==b
+*     @retval false a!=b
+*/
+template<int n>
+bool operator==(const SafeInt<n> &a,const long long &b){
+
+}
+
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否等于b
+*     @retval true a==b
+*     @retval false a!=b
+*/
+template<int n>
+bool operator==(const long long &a, const SafeInt<n> &b){
+
+}
+
+
+/**
+* @brief 比较两个SafeInt的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否不等于b
+*     @retval true a!=b
+*     @retval false a==b
+*/
+template<int n>
+bool operator!=(const SafeInt<n> &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个标准整数
+* 
+* @return 返回a是否不等于b
+*     @retval true a!=b
+*     @retval false a==b
+*/
+template<int n>
+bool operator!=(const SafeInt<n> &a,const long long &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否不等于b
+*     @retval true a!=b
+*     @retval false a==b
+*/
+template<int n>
+bool operator!=(const long long &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较两个SafeInt的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否大于等于b
+*     @retval true a>=b
+*     @retval false a<b
+*/
+template<int n>
+bool operator>=(const SafeInt<n> &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个标准整数
+* 
+* @return 返回a是否大于等于b
+*     @retval true a>=b
+*     @retval false a<b
+*/
+template<int n>
+bool operator>=(const SafeInt<n> &a,const long long &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否大于等于b
+*     @retval true a>=b
+*     @retval false a<b
+*/
+template<int n>
+bool operator>=(const long long &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较两个SafeInt的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否小于等于b
+*     @retval true a<=b
+*     @retval false a>b
+*/
+template<int n>
+bool operator<=(const SafeInt<n> &a, const SafeInt<n> &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个SafeInt
+* @param b 第二个标准整数
+* 
+* @return 返回a是否小于等于b
+*     @retval true a<=b
+*     @retval false a>b
+*/
+template<int n>
+bool operator<=(const SafeInt<n> &a,const long long &b){
+
+}
+
+/**
+* @brief 比较一个SafeInt和标准整数的大小
+* 
+* @param a 第一个标准整数
+* @param b 第二个SafeInt
+* 
+* @return 返回a是否小于等于b
+*     @retval true a<=b
+*     @retval false a>b
+*/
+template<int n>
+bool operator<=(const long long &a, const SafeInt<n> &b){
 
 }
