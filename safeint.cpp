@@ -191,7 +191,28 @@ void SafeInt<n>::opposite(){
 */
 template<int n>
 SafeInt<n> operator+(const SafeInt<n>& a,const SafeInt<n>& b){
-
+    std::bitset<n> c
+    // 进位标志
+    bool car=0,c2=0;
+    // 模拟加法，c=a+b
+    for (int i=n-1;i>=0;i--){
+        c[i]=a[i]!=b[i]!=car;
+        c2=car;
+        car=a[i]&&b[i]&&car;
+    }
+    SafeInt<n>r=c;
+    //溢出检测
+    if (c[0]!=(a[0]!=b[0]!=c2)){
+        c=0;
+        c.flip();
+        c[0]=a[0]!=b[0]!=c2;
+        if (c[0]){
+            c[0]=0;
+            r=c;
+            r.opposite();
+        }
+    }
+    return r;
 }
 
 /**
@@ -204,7 +225,9 @@ SafeInt<n> operator+(const SafeInt<n>& a,const SafeInt<n>& b){
 */
 template<int n>
 SafeInt<n> operator-(const SafeInt<n>& a,const SafeInt<n>& b){
-
+    SafeInt<n> _b=b;
+    _b.opposite();
+    return a+_b;
 }
 
 /**
@@ -217,7 +240,12 @@ SafeInt<n> operator-(const SafeInt<n>& a,const SafeInt<n>& b){
 */
 template<int n>
 SafeInt<n> operator*(const SafeInt<n>& a,const SafeInt<n>& b){
-
+    SafeInt<n> c;
+    for (int i=0;i<n;i++){
+        if (b[n-i-1]){
+            c=c+SafeInt<n>(a.getVal()<<i);
+        }
+    }
 }
 
 /**
@@ -256,7 +284,7 @@ SafeInt<n> operator%(const SafeInt<n>& a,const SafeInt<n>& b){
 */
 template<int n>
 SafeInt<n> operator+(const SafeInt<n>& a,const long long& b){
-
+    return a+SafeInt<n>(b);
 }
 
 /**
@@ -269,7 +297,7 @@ SafeInt<n> operator+(const SafeInt<n>& a,const long long& b){
 */
 template<int n>
 SafeInt<n> operator-(const SafeInt<n>& a,const long long& b){
-
+    return a-SafeInt<n>(b);
 }
 
 /**
@@ -282,7 +310,7 @@ SafeInt<n> operator-(const SafeInt<n>& a,const long long& b){
 */
 template<int n>
 SafeInt<n> operator*(const SafeInt<n>& a,const long long& b){
-
+    return a*SafeInt<n>(b);
 }
 
 /**
@@ -321,7 +349,7 @@ SafeInt<n> operator%(const SafeInt<n>& a,const long long& b){
 */
 template<int n>
 SafeInt<n> operator+(const long long& b, const SafeInt<n>& a){
-
+    return SafeInt<n>(a)+b;
 }
 
 /**
@@ -334,7 +362,7 @@ SafeInt<n> operator+(const long long& b, const SafeInt<n>& a){
 */
 template<int n>
 SafeInt<n> operator-(const long long& b, const SafeInt<n>& a){
-
+    return SafeInt<n>(a)-b;
 }
 
 /**
@@ -347,7 +375,7 @@ SafeInt<n> operator-(const long long& b, const SafeInt<n>& a){
 */
 template<int n>
 SafeInt<n> operator*(const long long& b, const SafeInt<n>& a){
-
+    return SafeInt<n>(a)*b;
 }
 
 /**
@@ -414,7 +442,8 @@ std::ostream& operator<<(std::ostream &in, const SafeInt<n> &b){
 */
 template<int n>
 bool operator<(const SafeInt<n> &a, const SafeInt<n> &b){
-
+    SafeInt<n> c=b-a;
+    return c.getVal()[0] &&c!=0;
 }
 
 /**
@@ -429,7 +458,7 @@ bool operator<(const SafeInt<n> &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator<(const SafeInt<n> &a,const long long &b){
-
+    return a<SafeInt<n>(b);
 }
 
 /**
@@ -444,7 +473,7 @@ bool operator<(const SafeInt<n> &a,const long long &b){
 */
 template<int n>
 bool operator<(const long long &a, const SafeInt<n> &b){
-
+    return return SafeInt<n>(a)<b;
 }
 
 
@@ -460,7 +489,8 @@ bool operator<(const long long &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator>(const SafeInt<n> &a, const SafeInt<n> &b){
-
+    SafeInt<n> c=a-b;
+    return c.getVal()[0]&&c!=0;
 }
 
 /**
@@ -475,7 +505,7 @@ bool operator>(const SafeInt<n> &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator>(const SafeInt<n> &a,const long long &b){
-
+    return a>SafeInt<n>(b);
 }
 
 /**
@@ -490,7 +520,7 @@ bool operator>(const SafeInt<n> &a,const long long &b){
 */
 template<int n>
 bool operator>(const long long &a, const SafeInt<n> &b){
-
+    return SafeInt<n>(a)>b; 
 }
 
 /**
@@ -505,7 +535,7 @@ bool operator>(const long long &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator==(const SafeInt<n> &a, const SafeInt<n> &b){
-
+    return a.getVal()==b.getVal();
 }
 
 /**
@@ -520,7 +550,7 @@ bool operator==(const SafeInt<n> &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator==(const SafeInt<n> &a,const long long &b){
-
+    return a==SafeInt<n>(b);
 }
 
 
@@ -536,7 +566,7 @@ bool operator==(const SafeInt<n> &a,const long long &b){
 */
 template<int n>
 bool operator==(const long long &a, const SafeInt<n> &b){
-
+    return b==SafeInt<n>(a);
 }
 
 
@@ -552,7 +582,7 @@ bool operator==(const long long &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator!=(const SafeInt<n> &a, const SafeInt<n> &b){
-
+    return !(a==b)
 }
 
 /**
@@ -567,7 +597,7 @@ bool operator!=(const SafeInt<n> &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator!=(const SafeInt<n> &a,const long long &b){
-
+    return a!=SafeInt<n>(b);
 }
 
 /**
@@ -582,7 +612,7 @@ bool operator!=(const SafeInt<n> &a,const long long &b){
 */
 template<int n>
 bool operator!=(const long long &a, const SafeInt<n> &b){
-
+    return b!=SafeInt<n>(a);
 }
 
 /**
@@ -597,7 +627,7 @@ bool operator!=(const long long &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator>=(const SafeInt<n> &a, const SafeInt<n> &b){
-
+    return a>b||a==b;
 }
 
 /**
@@ -612,7 +642,7 @@ bool operator>=(const SafeInt<n> &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator>=(const SafeInt<n> &a,const long long &b){
-
+    return a>b||a==b;
 }
 
 /**
@@ -627,7 +657,7 @@ bool operator>=(const SafeInt<n> &a,const long long &b){
 */
 template<int n>
 bool operator>=(const long long &a, const SafeInt<n> &b){
-
+    return a>b||a==b;
 }
 
 /**
@@ -642,7 +672,7 @@ bool operator>=(const long long &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator<=(const SafeInt<n> &a, const SafeInt<n> &b){
-
+    return a<b||a==b;
 }
 
 /**
@@ -657,7 +687,7 @@ bool operator<=(const SafeInt<n> &a, const SafeInt<n> &b){
 */
 template<int n>
 bool operator<=(const SafeInt<n> &a,const long long &b){
-
+    return a<b||a==b;
 }
 
 /**
@@ -672,5 +702,5 @@ bool operator<=(const SafeInt<n> &a,const long long &b){
 */
 template<int n>
 bool operator<=(const long long &a, const SafeInt<n> &b){
-
+    return a<b||a==b;
 }
