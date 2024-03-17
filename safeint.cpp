@@ -331,7 +331,18 @@ SafeInt<n> operator*(const SafeInt<n>& a,const SafeInt<n>& b){
 */
 template<int n>
 SafeInt<n> operator/(const SafeInt<n>& a,const SafeInt<n>& b){
-
+    SafeInt<n> _a=a,_b=b;
+    std::bitset<int> c;
+    if (a.getVal()[0]) _a.opposite();
+    if (b.getVal()[0]) _b.opposite();
+    for (int i=n-1;i>=1;i--){
+        if (SafeInt<n>(_a.getVal()>>i)<_a) c[i]=false;
+        else{
+            _a= _a-SafeInt<n>(_b.getVal()<<i);
+            c[i]=1;
+        }
+    }
+    return SafeInt<n>(c);
 }
 
 /**
@@ -344,7 +355,18 @@ SafeInt<n> operator/(const SafeInt<n>& a,const SafeInt<n>& b){
 */
 template<int n>
 SafeInt<n> operator%(const SafeInt<n>& a,const SafeInt<n>& b){
-
+    SafeInt<n> _a=a,_b=b;
+    std::bitset<int> c;
+    if (a.getVal()[0]) _a.opposite();
+    if (b.getVal()[0]) _b.opposite();
+    for (int i=n-1;i>=1;i--){
+        if (SafeInt<n>(_a.getVal()>>i)<_a) c[i]=false;
+        else{
+            _a=_a-SafeInt<n>(_b.getVal()<<i);
+            c[i]=1;
+        }
+    }
+    return _a;
 }
 
 /**
