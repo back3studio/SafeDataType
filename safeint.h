@@ -273,10 +273,10 @@ std::ostream& operator<<(std::ostream &out, const SafeInt<n> &b);
 
 /**
 * @brief 比较两个SafeInt的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否小于b
 *     @retval true a<b
 *     @retval false a<=b
@@ -285,10 +285,10 @@ template<int n>
 bool operator<(const SafeInt<n> &a, const SafeInt<n> &b);
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个标准整数
-* 
+*
 * @return 返回a是否小于b
 *     @retval true a<b
 *     @retval false a<=b
@@ -298,10 +298,10 @@ bool operator<(const SafeInt<n> &a,const long long &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个标准整数
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否小于b
 *     @retval true a<b
 *     @retval false a<=b
@@ -311,10 +311,10 @@ bool operator<(const long long &a, const SafeInt<n> &b);
 
 /**
 * @brief 比较两个SafeInt的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否大于b
 *     @retval true a>b
 *     @retval false a<=b
@@ -323,10 +323,10 @@ template<int n>
 bool operator>(const SafeInt<n> &a, const SafeInt<n> &b);
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个标准整数
-* 
+*
 * @return 返回a是否大于b
 *     @retval true a>b
 *     @retval false a<=b
@@ -336,10 +336,10 @@ bool operator>(const SafeInt<n> &a,const long long &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个标准整数
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否大于b
 *     @retval true a>b
 *     @retval false a<=b
@@ -349,10 +349,10 @@ bool operator>(const long long &a, const SafeInt<n> &b);
 
 /**
 * @brief 比较两个SafeInt的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否等于b
 *     @retval true a==b
 *     @retval false a!=b
@@ -361,10 +361,10 @@ template<int n>
 bool operator==(const SafeInt<n> &a, const SafeInt<n> &b);
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个标准整数
-* 
+*
 * @return 返回a是否等于b
 *     @retval true a==b
 *     @retval false a!=b
@@ -374,10 +374,10 @@ bool operator==(const SafeInt<n> &a,const long long &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个标准整数
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否等于b
 *     @retval true a==b
 *     @retval false a!=b
@@ -387,10 +387,10 @@ bool operator==(const long long &a, const SafeInt<n> &b);
 
 /**
 * @brief 比较两个SafeInt的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否不等于b
 *     @retval true a!=b
 *     @retval false a==b
@@ -399,10 +399,10 @@ template<int n>
 bool operator!=(const SafeInt<n> &a, const SafeInt<n> &b);
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个标准整数
-* 
+*
 * @return 返回a是否不等于b
 *     @retval true a!=b
 *     @retval false a==b
@@ -412,10 +412,10 @@ bool operator!=(const SafeInt<n> &a,const long long &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个标准整数
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否不等于b
 *     @retval true a!=b
 *     @retval false a==b
@@ -425,10 +425,10 @@ bool operator!=(const long long &a, const SafeInt<n> &b);
 
 /**
 * @brief 比较两个SafeInt的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否大于等于b
 *     @retval true a>=b
 *     @retval false a<b
@@ -438,10 +438,10 @@ bool operator>=(const SafeInt<n> &a, const SafeInt<n> &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个标准整数
-* 
+*
 * @return 返回a是否大于等于b
 *     @retval true a>=b
 *     @retval false a<b
@@ -451,10 +451,10 @@ bool operator>=(const SafeInt<n> &a,const long long &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个标准整数
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否大于等于b
 *     @retval true a>=b
 *     @retval false a<b
@@ -464,10 +464,10 @@ bool operator>=(const long long &a, const SafeInt<n> &b);
 
 /**
 * @brief 比较两个SafeInt的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否小于等于b
 *     @retval true a<=b
 *     @retval false a>b
@@ -477,10 +477,10 @@ bool operator<=(const SafeInt<n> &a, const SafeInt<n> &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个SafeInt
 * @param b 第二个标准整数
-* 
+*
 * @return 返回a是否小于等于b
 *     @retval true a<=b
 *     @retval false a>b
@@ -490,10 +490,10 @@ bool operator<=(const SafeInt<n> &a,const long long &b);
 
 /**
 * @brief 比较一个SafeInt和标准整数的大小
-* 
+*
 * @param a 第一个标准整数
 * @param b 第二个SafeInt
-* 
+*
 * @return 返回a是否小于等于b
 *     @retval true a<=b
 *     @retval false a>b
